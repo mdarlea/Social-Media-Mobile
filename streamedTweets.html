@@ -1,0 +1,43 @@
+﻿<ons-navigator title="Navigator" var="appNavigator">
+    <ons-page ng-controller="streamedTweetsController">
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button>
+                    <ons-icon icon="ion-compose" fixed-width="false" style="font-size: 26px; vertical-align: -4px"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+            <div class="center">
+                Timeline
+            </div>
+            <div class="right">
+                <ons-toolbar-button>
+                    <ons-icon icon="ion-ios7-search-strong" fixed-width="false" style="font-size: 26px; vertical-align: -4px;"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+
+        <ons-scroller when-scrolled="loadMore()">
+            <ons-list style="margin: -1px 0">
+                <ons-list-item modifier="chevron" class="timeline-li" ng-repeat="item in data.items">
+                    <ons-row>
+                        <ons-col width="50px">
+                            <img ng-src="{{item.ProfileImageUrl}}" class="timeline-image">
+                        </ons-col>
+
+                        <ons-col>
+                            <div class="timeline-date">3m</div>
+                            <div class="timline-from">
+                                <span class="timeline-name">{{item.Name}}</span>
+                                <span class="timeline-id">{{item.UserName}}</span>
+                            </div>
+
+                            <div class="timeline-message">
+                                {{item.Text}}
+                            </div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+            </ons-list>
+        </ons-scroller>
+    </ons-page>
+</ons-navigator>
