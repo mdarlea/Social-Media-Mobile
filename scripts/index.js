@@ -22,4 +22,10 @@
     function onResume() {
         // TODO: This application has been reactivated. Restore application state here.
     };
-} )();
+})();
+
+function handleOpenURL(url) {
+    var body = document.getElementsByTagName("body")[0];
+    var loginController = angular.element(body).scope();
+    loginController.externalAuthorization(url);
+}

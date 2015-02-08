@@ -115,13 +115,23 @@
     </Content>
     <Content Include="css\StreamedTweets.css" />
     <Content Include="gulpfile.js" />
+    <Content Include="images\beach.jpg" />
+    <Content Include="images\green.jpg" />
+    <Content Include="images\meeting.jpg" />
+    <Content Include="images\mountain.jpg" />
+    <Content Include="images\nature1.jpg" />
+    <Content Include="images\nature2.jpg" />
+    <Content Include="images\sign-in-with-twitter-gray.png" />
+    <Content Include="images\sm7.jpg" />
+    <Content Include="images\sm8.jpg" />
     <Content Include="js\app.js" />
     <Content Include="js\Constants\AuthSettings.js" />
     <Content Include="js\Controllers\homeController.js" />
     <Content Include="js\Controllers\loginController.js" />
     <Content Include="js\Controllers\streamedTweetsController.js" />
     <Content Include="js\Controllers\TestController.js" />
-    <Content Include="js\Directives\Scroll.js" />
+    <Content Include="js\Directives\backgroundSlider.js" />
+    <Content Include="js\Directives\scroll.js" />
     <Content Include="js\Services\authInterceptorService.js" />
     <Content Include="js\Services\authService.js" />
     <Content Include="js\Services\localStorageService.js" />
@@ -190,7 +200,7 @@
     <Content Include="lib\onsen\stylus\default.styl" />
     <Content Include="lib\onsen\stylus\purple-theme.styl" />
     <Content Include="lib\onsen\stylus\sunshine-theme.styl" />
-    <Content Include="login.html" />
+    <Content Include="home.html" />
     <Content Include="package.json" />
     <Content Include="plugins\nl.x-services.plugins.launchmyapp\.fetch.json" />
     <Content Include="plugins\nl.x-services.plugins.launchmyapp\plugin.xml" />
@@ -268,7 +278,6 @@
     <Content Include="styles\onsen-css-components.css" />
     <Content Include="styles\onsenui.css" />
     <Content Include="test.html" />
-    <Folder Include="images\" />
     <Content Include="hooks\README.md" />
     <Content Include="merges\android\scripts\android2.3-jscompat.js" />
     <Content Include="merges\android\scripts\platformOverrides.js" />

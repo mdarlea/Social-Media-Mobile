@@ -110,50 +110,6 @@ angular.module('app').factory('authService', ['$http', '$q', 'localStorageServic
             return deferred.promise;
         },
 
-        obtainAccessToken: function (externalData, action) {
-
-            var deferred = $q.defer();
-
-            var actionName = (action) ? action : "ObtainLocalAccessToken";
-
-            var url = serviceBase + "api/Account/" + actionName;
-           
-            service.authentication.isAuthorizing = true;
-
-            $http.get(url, {
-                 params: externalData
-            }).success(function (response) {
-                var hasRegistered = response.hasRegistered;
-
-                if (hasRegistered) {
-
-                    service._authorize(response);
-
-                }
-                else {
-                    service.authentication.isAuth = false;
-                    service.authentication.userName = "";
-                    service.authentication.useRefreshTokens = false;
-                 
-                    service.externalAuthData.userName = response.externalUserName;
-                    service.externalAuthData.externalAccessToken = response.externalAccessToken;
-                    service.externalAuthData.externalAccessVerifier = response.externalAccessVerifier;
-                }
-
-                service.authentication.isAuthorizing = false;
-
-                deferred.resolve(response);
-
-            }).error(function (err, status) {
-                service.logOut();
-
-                service.authentication.isAuthorizing = false;
-                deferred.reject(err);
-            });
-
-            return deferred.promise;
-        },
-
         registerExternal: function (registerExternalData) {
 
             var deferred = $q.defer();

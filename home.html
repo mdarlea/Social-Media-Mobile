@@ -25,7 +25,8 @@
 
     <script src="js/Controllers/loginController.js"></script>
     
-    <script src="js/Directives/Scroll.js"></script>
+    <script src="js/Directives/backgroundSlider.js"></script>
+    <script src="js/Directives/scroll.js"></script>
 
     <script src="js/Controllers/streamedTweetsController.js"></script>
 
@@ -34,22 +35,27 @@
     <script src="js/Services/localStorageService.js"></script>
 
     <script src="scripts/index.js"></script>
+
+    <script>
+        ons.bootstrap();
+    </script>
 </head>
 <body ng-controller="loginController">
-    <ons-page>
-        <h4>Login</h4>
-        <p>
-            <span>You can login using one of the social logins below</span>
-        </p>
-        <p style="text-align: center;">
+    <div bg-slider="images" class="beach"></div>
+    <ons-page modifier="bg-transparent">        
+        <p style="text-align: center;" ng-show="!isAuthorized()">
             <ons-button var="login.facebook" ng-click="authExternalProvider('Facebook')">| Connect with Facebook</ons-button>
         </p>
-        <p style="text-align: center;">
+        <p style="text-align: center;" ng-show="!isAuthorized()">
             <ons-button var="login.google" ng-click="authExternalProvider('Google')">| Connect with Google+</ons-button>
         </p>
-        <p style="text-align: center;">
-            <ons-button var="login.twitter" ng-click="authExternalProvider('Twitter')">| Connect with Twitter</ons-button>
+        <p style="text-align: center;" ng-show="!isAuthorized()">
+            <ons-button var="login.twitter" class="button login twitter" ng-click="authExternalProvider('Twitter')"></ons-button>
         </p>
-    </ons-page>
+        <p style="text-align: center;">
+            {{auth.token}}    
+        </p>
+        
+</ons-page>
 </body>
 </html>
