@@ -1,0 +1,8 @@
+﻿<ons-list ng-controller="MenuController">
+    <ons-list-item ng-repeat="page in pages"
+                   ng-click="navigateToPage(page.name)"
+                   modifier="chevron">
+        <i class="fa fa-{{page.icon}} fa-lg" style="color: #666"></i>
+        &nbsp;  {{page.title}}
+    </ons-list-item>
+</ons-list>

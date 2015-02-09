@@ -4,6 +4,7 @@
     angular.module('app').directive('bgSlider', function () {
         var data = {
             loading: true,
+            //imgPathPattern: "/images/{0}.jpg",
             imgPathPattern: null,
             backgroundImages: [],
             idx: 0,
@@ -36,16 +37,24 @@
                 }
             },
             loadImage: function (name, counter, callback) {
+                var imgPath = this.imgPathPattern.replace("{0}", name);
+
                 var image = new Image();
-                image.src = this.imgPathPattern.replace("{0}", name);
+                image.src = imgPath;
                 var that = this;
                 image.onload = function (img) {
+                    console.log("Image loaded " + img);
                     var css = that.backgroundImages;
                     css.push(name);
                     if (css.length === counter) {
                         callback();
                         that.loading = false;
                     }
+                };
+
+                // handle failure
+                image.onerror = function () {
+                    console.log("Could not load image " + imgPath);
                 };
             }
         };
@@ -58,7 +67,7 @@
                 if (!elm.hasClass(css)) {
                     elm.addClass(css);
                 }
-
+                
                 scope.$watch(attr.bgSlider, function (newVal, oldVal) {
                     //preload images
                     data.load(newVal, function () {

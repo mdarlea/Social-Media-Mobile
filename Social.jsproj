@@ -110,9 +110,6 @@
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="callback.html">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="css\StreamedTweets.css" />
     <Content Include="gulpfile.js" />
     <Content Include="images\beach.jpg" />
@@ -127,7 +124,9 @@
     <Content Include="js\app.js" />
     <Content Include="js\Constants\AuthSettings.js" />
     <Content Include="js\Controllers\homeController.js" />
-    <Content Include="js\Controllers\loginController.js" />
+    <Content Include="js\Controllers\indexController.js" />
+    <Content Include="js\Controllers\oauthController.js" />
+    <Content Include="js\Controllers\menuController.js" />
     <Content Include="js\Controllers\streamedTweetsController.js" />
     <Content Include="js\Controllers\TestController.js" />
     <Content Include="js\Directives\backgroundSlider.js" />
@@ -137,6 +136,7 @@
     <Content Include="js\Services\localStorageService.js" />
     <Content Include="js\Services\pagedDataService.js" />
     <Content Include="js\Services\streamedTweetsService.js" />
+    <Content Include="js\Services\utilitiesService.js" />
     <Content Include="js\Services\_template.js" />
     <Content Include="lib\onsen\css\font_awesome\css\font-awesome.css" />
     <Content Include="lib\onsen\css\font_awesome\css\font-awesome.min.css" />
@@ -200,8 +200,10 @@
     <Content Include="lib\onsen\stylus\default.styl" />
     <Content Include="lib\onsen\stylus\purple-theme.styl" />
     <Content Include="lib\onsen\stylus\sunshine-theme.styl" />
-    <Content Include="home.html" />
+    <Content Include="menu.html" />
+    <Content Include="oauth.html" />
     <Content Include="package.json" />
+    <Content Include="packages.config" />
     <Content Include="plugins\nl.x-services.plugins.launchmyapp\.fetch.json" />
     <Content Include="plugins\nl.x-services.plugins.launchmyapp\plugin.xml" />
     <Content Include="plugins\nl.x-services.plugins.launchmyapp\README.md" />
@@ -266,6 +268,10 @@
     <Content Include="plugins\org.apache.cordova.inappbrowser\www\windows8\InAppBrowserProxy.js" />
     <Content Include="Project_Readme.html" />
     <Content Include="README.md" />
+    <Content Include="scripts\jquery-1.8.0.intellisense.js" />
+    <Content Include="scripts\jquery-1.8.0.js" />
+    <Content Include="scripts\jquery-1.8.0.min.js" />
+    <Content Include="scripts\jquery.css3caching.js" />
     <Content Include="settings.html" />
     <Content Include="streamedTweets.html" />
     <Content Include="styles\app.css" />
@@ -281,6 +287,7 @@
     <Content Include="hooks\README.md" />
     <Content Include="merges\android\scripts\android2.3-jscompat.js" />
     <Content Include="merges\android\scripts\platformOverrides.js" />
+    <Content Include="home.html" />
     <Folder Include="merges\ios\" />
     <Content Include="merges\windows\scripts\platformOverrides.js" />
     <Content Include="merges\windows\scripts\winstore-jscompat.js" />

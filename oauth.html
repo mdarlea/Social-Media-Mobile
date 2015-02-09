@@ -1,0 +1,19 @@
+﻿<div ng-controller="OauthController" id="login_page">
+    <div bg-slider="slides" class="beach"></div>
+    <ons-page modifier="bg-transparent">
+        <p style="text-align: center;">
+            <h4>{{message}}</h4>
+        </p>
+        <div ng-show="!isAuth">
+            <p style="text-align: center;">
+                <ons-button var="login.button.facebook" ng-click="authExternal('Facebook')">| Connect with Facebook</ons-button>
+            </p>
+            <p style="text-align: center;">
+                <ons-button var="login.button.google" ng-click="authExternal('Google')">| Connect with Google+</ons-button>
+            </p>
+            <p style="text-align: center;">
+                <ons-button var="login.button.twitter" class="button login twitter" ng-click="authExternal('Twitter')"></ons-button>
+            </p>
+        </div>
+    </ons-page>
+</div>

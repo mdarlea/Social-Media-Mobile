@@ -2,7 +2,12 @@
     'use strict';
 
     angular.module('app').controller('testController', ['$scope', function ($scope) {
-        
-        $scope.message = "Hello World";
+        ons.ready(function () {
+            
+            //$scope.ons.screen.presentPage("test.html");
+        });
+
+        $scope.message = "Test";
+
     }]);
 })();

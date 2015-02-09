@@ -1,19 +1,12 @@
-﻿<ons-navigator>
-    <ons-page ng-controller="testController">
-        <ons-toolbar>
-            <div class="left">
-                <ons-toolbar-button>
-                    <ons-icon icon="ion-compose" fixed-width="false" style="font-size: 26px; vertical-align: -4px"></ons-icon>
-                </ons-toolbar-button>
-            </div>
-            <div class="center">
-                {{message}}
-            </div>
-            <div class="right">
-                <ons-toolbar-button>
-                    <ons-icon icon="ion-ios7-search-strong" fixed-width="false" style="font-size: 26px; vertical-align: -4px;"></ons-icon>
-                </ons-toolbar-button>
-            </div>
-        </ons-toolbar>
-    </ons-page>
-</ons-navigator>
+﻿<ons-page class="center bgMain" ng-controller="testController">
+    <ons-toolbar>
+        <div class="left">
+            <ons-toolbar-button onclick="index.menu.toggleMenu()">
+                <ons-icon icon="fa-bars"></ons-icon>
+            </ons-toolbar-button>
+        </div>
+        <div class="center">{{message}}</div>
+    </ons-toolbar>
+
+    <p>Test </p>
+</ons-page>

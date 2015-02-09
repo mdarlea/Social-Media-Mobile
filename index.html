@@ -16,6 +16,7 @@
     <script src="scripts/platformOverrides.js"></script>
     <script src="LaunchMyApp.js"></script>
 
+    <script src="scripts/jquery-1.8.0.min.js"></script>
     <script src="lib/onsen/js/angular/angular.js"></script>
     <script src="lib/onsen/js/angular/angular-touch.js"></script>
     <script src="lib/onsen/js/onsenui.js"></script>
@@ -23,25 +24,39 @@
     <script src="js/app.js"></script>
     <script src="js/Constants/AuthSettings.js"></script>
 
-    <script src="js/Controllers/homeController.js"></script>
-    <script src="js/Controllers/TestController.js"></script>
-
+    <script src="js/Directives/backgroundSlider.js"></script>
     <script src="js/Directives/scroll.js"></script>
 
-    <script src="js/Controllers/streamedTweetsController.js"></script>
+    <script src="js/Controllers/indexController.js"></script>
+    <script src="js/Controllers/oauthController.js"></script>
+    <script src="js/Controllers/menuController.js"></script>
+
+    <script src="js/Controllers/homeController.js"></script>
+    <script src="js/Controllers/TestController.js"></script>
 
     <script src="js/Services/authInterceptorService.js"></script>
     <script src="js/Services/authService.js"></script>
     <script src="js/Services/localStorageService.js"></script>
-    <script src="js/Services/pagedDataService.js"></script>
-    <script src="js/Services/streamedTweetsService.js"></script>
-
+    <script src="js/Services/utilitiesService.js"></script>
+    
+    <script src="scripts/jquery.css3caching.js"></script>
     <script src="scripts/index.js"></script>
+
+    <script>
+        ons.bootstrap();
+    </script>
 </head>
-<body ng-controller="homeController">
-    <ons-tabbar var="tabbar">
-        <ons-tab page="test.html" label="Timeline" icon="ion-home" active="true"></ons-tab>
-        <ons-tab page="settings.html" label="Settings" icon="ion-gear-a"></ons-tab>
-    </ons-tabbar>
+<body ng-controller="IndexController">
+    <ons-sliding-menu side="left"
+                      var="index.menu">
+    </ons-sliding-menu>
+
+    <ons-tabbar var="index.tabbar"></ons-tabbar>
+
+        <!--<ons-tabbar var="tabbar">
+            <ons-tab page="test.html" label="Timeline" icon="ion-home" active="true"></ons-tab>
+            <ons-tab page="settings.html" label="Settings" icon="ion-gear-a"></ons-tab>
+        </ons-tabbar>-->
+
 </body>
 </html>
