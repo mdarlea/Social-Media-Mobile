@@ -23,7 +23,8 @@ angular.module('app').factory('authInterceptorService', ['$q', '$injector', '$lo
 
         responseError: function (rejection) {
             if (rejection.status === 401) {
-                var authService = $injector.get('authService');
+                //var authService = $injector.get('authService');
+                var service = $injector.get('$onsenService');
                 var authData = localStorageService.get('authorizationData');
 
                 if (authData) {
@@ -32,7 +33,7 @@ angular.module('app').factory('authInterceptorService', ['$q', '$injector', '$lo
                         return $q.reject(rejection);
                     }
                 }
-                authService.logOut();
+                service.logOut();
                 $location.path('/login');
             }
             return $q.reject(rejection);

@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').controller('OauthController', ['$scope', 'ngAuthSettings', '$utilities', 'authService', '$onsenService',
+    angular.module('app').controller('LoginController', ['$scope', 'ngAuthSettings', '$utilities', 'authService', '$onsenService',
         function ($scope, ngAuthSettings, $utilities, authService, $onsenService) {
             $scope.slides = ['beach', 'green', 'mountain', 'nature1', 'nature2'];
 
@@ -13,7 +13,7 @@
                     return;
                 };
 
-                //authService.debugAuth(true);
+                //$onsenService.debugAuth(true);
                 //$onsenService.buildMainNavigation();
                 //return;
 
@@ -35,7 +35,7 @@
                 var ref = window.open(externalProviderUrl, "_system");
             };
 
-            $scope.isAuth = authService.authentication.isAuth;
+            //$scope.isAuth = authService.authentication.isAuth;
 
             $scope.externalAuthorization = function (url) {
                 ons.ready(function () {
@@ -55,11 +55,11 @@
                         authService.obtainAccessToken(externalData, "ObtainLocalAccessTokenWithVerifier")
                             .then(function (response) {
                                 if (!authService.authentication.isAuth) {
-                                    authService.logOut();
                                     $scope.message = "Not authorized";
+                                    $onsenService.logOut();
                                     //$location.path('/registerexternal');
                                 } else {
-                                    $onsenService.buildMainNavigation(authService.authentication.isAuth);
+                                    $onsenService.buildMainNavigation();
                                 }
 
                             }, function (err) {
@@ -69,7 +69,6 @@
                             });
                     });
                 });
-           
            
         };
 

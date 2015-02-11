@@ -125,7 +125,7 @@
     <Content Include="js\Constants\AuthSettings.js" />
     <Content Include="js\Controllers\homeController.js" />
     <Content Include="js\Controllers\indexController.js" />
-    <Content Include="js\Controllers\oauthController.js" />
+    <Content Include="js\Controllers\loginController.js" />
     <Content Include="js\Controllers\menuController.js" />
     <Content Include="js\Controllers\settingsController.js" />
     <Content Include="js\Controllers\streamedTweetsController.js" />
@@ -134,7 +134,7 @@
     <Content Include="js\Services\authInterceptorService.js" />
     <Content Include="js\Services\authService.js" />
     <Content Include="js\Services\localStorageService.js" />
-    <Content Include="js\Services\onsenService.js" />
+    <Content Include="js\Services\onsService.js" />
     <Content Include="js\Services\pagedDataService.js" />
     <Content Include="js\Services\streamedTweetsService.js" />
     <Content Include="js\Services\utilitiesService.js" />
@@ -203,7 +203,7 @@
     <Content Include="lib\onsen\stylus\sunshine-theme.styl" />
     <Content Include="mainNav.html" />
     <Content Include="menu.html" />
-    <Content Include="oauth.html" />
+    <Content Include="login.html" />
     <Content Include="package.json" />
     <Content Include="packages.config" />
     <Content Include="plugins\nl.x-services.plugins.launchmyapp\.fetch.json" />
