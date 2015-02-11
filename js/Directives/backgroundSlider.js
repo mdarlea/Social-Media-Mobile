@@ -1,7 +1,9 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').directive('bgSlider', function () {
+    var module = angular.module('bgSlider', []);
+
+    module.directive('bgSlider', function () {
         var data = {
             loading: true,
             //imgPathPattern: "/images/{0}.jpg",
