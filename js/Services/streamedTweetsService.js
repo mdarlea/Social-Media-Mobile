@@ -12,8 +12,7 @@
                             fields: ["UserName"]
                         },
                         pagingOptions: {
-                            pageSize: 10,
-                            currentPage: 1
+                            pageSize: 10
                         }
                     }
                 });
