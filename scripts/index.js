@@ -15,6 +15,8 @@
         
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
         $(document).ready(onJqueryReady);
+
+        console.log("console.log works well");
     };
 
     function onJqueryReady() {
@@ -33,7 +35,7 @@
 function handleOpenURL(url) {
     console.log('The app launched with URL : ' + url);
 
-    var body = document.getElementById("login_page");
-    var loginController = angular.element(body).scope();
-    loginController.externalAuthorization(url);
+    var body = document.getElementById("init_page");
+    var oauthController = angular.element(body).scope();
+    oauthController.externalAuthorization(url);
 }

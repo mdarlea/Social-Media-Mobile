@@ -24,6 +24,12 @@
                 }
 
                 return parsed;
+            },
+
+            remove: function (key) {
+                if (key) {
+                    $window.localStorage.removeItem(key);
+                }
             }
         };
 

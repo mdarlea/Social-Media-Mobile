@@ -1,48 +1,47 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').controller('OauthController', ['$scope', 'ngAuthSettings', '$utilities', 'authService',
-        function ($scope, ngAuthSettings, $utilities, authService) {
+    angular.module('app').controller('OauthController', ['$scope', 'ngAuthSettings', '$utilities', 'authService', '$onsenService',
+        function ($scope, ngAuthSettings, $utilities, authService, $onsenService) {
             $scope.slides = ['beach', 'green', 'mountain', 'nature1', 'nature2'];
 
             $scope.message = "";
-        
-            $scope.isAuth = authService.authentication.isAuth;
             
-            $scope.getUserName = function () {
-                return authService.authentication.userName;
-            };
-        
-            $scope.authExternal = function (provider) {
+            $scope.authorize = function (provider) {
                 if (!provider) {
                     alert("Please specify a provider");
                     return;
                 };
 
-            //var button = $scope.login.button.[provider.toLowerCase()];
+                //authService.debugAuth(true);
+                //$onsenService.buildMainNavigation();
+                //return;
 
-            var externalProviderUrl = ngAuthSettings.apiServiceBaseUri;
-            if (provider === "Twitter") {
-                var callbackUrl = "appuri://callback";
-                //var callbackUrl = "http://www.swaksoft.com/oauth/callbackmobile";
+                var externalProviderUrl = ngAuthSettings.apiServiceBaseUri;
+                if (provider === "Twitter") {
+                    var callbackUrl = "appuri://callback";
+                    //var callbackUrl = "http://www.swaksoft.com/oauth/callbackmobile";
 
-                externalProviderUrl += "OAuth/AuthenticateExternal?callbackUrl=" + encodeURIComponent(callbackUrl);
+                    externalProviderUrl += "OAuth/AuthenticateExternal?callbackUrl=" + encodeURIComponent(callbackUrl);
                 
-            } else {
-                var redirectUri = ngAuthSettings.apiServiceBaseUri + 'facebookcomplete.html';
+                } else {
+                    var redirectUri = ngAuthSettings.apiServiceBaseUri + 'facebookcomplete.html';
 
-                externalProviderUrl += "api/Account/ExternalLogin?provider=" + provider
-                                                                             + "&response_type=token&client_id=" + ngAuthSettings.clientId
-                                                                             + "&redirect_uri=" + redirectUri;
-            }
+                    externalProviderUrl += "api/Account/ExternalLogin?provider=" + provider
+                                                                                 + "&response_type=token&client_id=" + ngAuthSettings.clientId
+                                                                                 + "&redirect_uri=" + redirectUri;
+                }
 
-            var ref = window.open(externalProviderUrl, "_system");
-        };
+                var ref = window.open(externalProviderUrl, "_system");
+            };
+
+            $scope.isAuth = authService.authentication.isAuth;
 
             $scope.externalAuthorization = function (url) {
                 ons.ready(function () {
                     $scope.$apply(function () {
                         $scope.isAuth = true;
+
                         $scope.message = "Authorizing Twitter ...";
 
                         var fragment = $utilities.getFragment(url);
@@ -60,8 +59,7 @@
                                     $scope.message = "Not authorized";
                                     //$location.path('/registerexternal');
                                 } else {
-                                    index.menu.setMenuPage("menu.html");
-                                    index.menu.setMainPage("home.html");
+                                    $onsenService.buildMainNavigation(authService.authentication.isAuth);
                                 }
 
                             }, function (err) {

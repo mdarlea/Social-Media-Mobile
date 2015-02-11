@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').factory('$streamedTweetsService', 
+    angular.module('app').factory('$streamedTweetsService',
         ['$http', '$q', '$pagedDataService', function ($http, $q, $pagedDataService) {
-            var service = $.extend(true, {},$pagedDataService, 
+            var service = $.extend(true, {}, $pagedDataService,
                 {
                     baseUrl: 'api/StreamedTweet',
                     data: {
@@ -16,8 +16,8 @@
                             currentPage: 1
                         }
                     }
-            });
+                });
 
             return service;
-    }]);
+        }]);
 })();

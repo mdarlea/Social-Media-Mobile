@@ -1,22 +1,24 @@
-﻿<ons-navigator title="Navigator" var="appNavigator">
-    <ons-page ng-controller="streamedTweetsController">
+﻿    <ons-page ng-controller="StreamedTweetsController">
         <ons-toolbar>
             <div class="left">
-                <ons-toolbar-button>
-                    <ons-icon icon="ion-compose" fixed-width="false" style="font-size: 26px; vertical-align: -4px"></ons-icon>
+                <ons-toolbar-button onclick="index.menu.toggleMenu() ">
+                    <ons-icon icon="fa-bars"></ons-icon>
                 </ons-toolbar-button>
             </div>
-            <div class="center">
-                Timeline
-            </div>
+            <div class="center">{{title}}</div>
             <div class="right">
                 <ons-toolbar-button>
                     <ons-icon icon="ion-ios7-search-strong" fixed-width="false" style="font-size: 26px; vertical-align: -4px;"></ons-icon>
                 </ons-toolbar-button>
             </div>
+            <!--<div class="left">
+                <ons-toolbar-button>
+                    <ons-icon icon="ion-compose" fixed-width="false" style="font-size: 26px; vertical-align: -4px"></ons-icon>
+                </ons-toolbar-button>
+            </div>-->
         </ons-toolbar>
-
-        <ons-scroller when-scrolled="loadMore()">
+        
+        <ons-scroller infinit-scroll-enable="true" on-scrolled="loadMore()" threshold="10">
             <ons-list style="margin: -1px 0">
                 <ons-list-item modifier="chevron" class="timeline-li" ng-repeat="item in data.items">
                     <ons-row>
@@ -37,7 +39,10 @@
                         </ons-col>
                     </ons-row>
                 </ons-list-item>
+                <ons-list-item ng-show="data.loading">
+                    <ons-icon icon="ion-load-b" size="30px" fixed-width="true"></ons-icon>
+                    {{loadingMessage}}
+                </ons-list-item>
             </ons-list>
         </ons-scroller>
     </ons-page>
-</ons-navigator>

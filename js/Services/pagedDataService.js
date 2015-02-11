@@ -6,10 +6,10 @@
 
         var service = {
             baseUrl: "",
-
+            
             data: {
                 fixedPage: false,
-
+                loading: false,
                 items: [],
                 totalRecords: 0,
                 selected: [],
@@ -27,17 +27,30 @@
 
                 pagingOptions: {
                     pageSizes: [5, 10, 20, 50, 100],
-                    pageSize: 5,
+                    pageSize: 10,
                     currentPage: 0
                 }
             },
 
+            init: function() {
+                this.data.items = [];
+                this.data.totalRecords = 0;
+                this.data.totalPages = 0;
+                this.data.pagingOptions.currentPage = 0;
+                this.data.loading = false;
+            },
+
             find: function (queryOptions) {
-                if (!this.data.fixedPage) {
-                    this.data.pagingOptions.currentPage++;
-                };
+                if (this.data.loading) {
+                    var defer = $q.defer();
+                    defer.reject();
+                    return defer.promise;
+                }
 
                 var query = (queryOptions) ? queryOptions : {};
+                var page = (this.data.fixedPage)
+                                ? this.data.pagingOptions.currentPage
+                                : this.data.pagingOptions.currentPage + 1;
 
                 var options = {
                     queryOptions: $.extend(true, {}, query,
@@ -50,13 +63,15 @@
                                 : false,
                             searchText: this.data.filterOptions.filterText
                         }),
-                    page: this.data.pagingOptions.currentPage,
+                    page: page,
                     pageSize: this.data.pagingOptions.pageSize
                 };
 
                 var deferred = $q.defer();
 
                 var that = this;
+                that.data.loading = true;
+
                 $http.post(serviceBase + this.baseUrl, options)
                     .success(function (data) {
                         if (that.data.fixedPage) {
@@ -66,12 +81,19 @@
                             for (var i = 0; i < data.Content.length; i++) {
                                 that.data.items.push(data.Content[i]);
                             }
+                            that.data.pagingOptions.currentPage++;
                         }
 
                         that.data.totalRecords = data.TotalRecords;
 
+                        that.data.loading = false;
+
                         deferred.resolve(data);
+
                     }).error(function () {
+
+                        that.data.loading = false;
+
                         deferred.reject();
                     });
 

@@ -6,19 +6,22 @@
            
         });
 
-        $scope.pages = [
-            {
-                name: 'home',
-                title: 'Home',
-                icon: 'home'
-            }, {
-                name: 'test',
-                title: 'Test',
-                icon: 'search'
-        }];
+        $scope.auth = authService.authentication;
 
-        $scope.isAuthorized = authService.authentication.isAuth;
-        
+        var getPages = function() {
+            $scope.pages = ($scope.auth.isAuth) ?
+                [{
+                      name: "streamedTweets.html",
+                      label: "Timeline",
+                      icon: "ion-grid",
+                      active: true
+                  }] : [];   
+        }
+
+        getPages();
+
+        $scope.watch("auth.isAuth", getPages);
+
         $scope.navigateToPage = function(page) {
             $scope.index.menu.setMainPage(page + '.html', { closeMenu: true });
         }
