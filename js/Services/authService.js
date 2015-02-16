@@ -40,12 +40,14 @@ angular.module('app').factory('authService', ['$http', '$q', 'localStorageServic
 
             service.authentication.isAuthorizing = true;
 
+            var data = $.extend(true, {}, externalData, { clientId: ngAuthSettings.clientId });
+
             $http.get(url, {
-                params: externalData
+                params: data
             }).success(function (response) {
                 var hasRegistered = response.hasRegistered;
 
-                service.externalAuthData.provider = externalData.provider;
+                service.externalAuthData.provider = data.provider;
 
                 if (hasRegistered) {
                     service._authorize(response);
@@ -159,17 +161,19 @@ angular.module('app').factory('authService', ['$http', '$q', 'localStorageServic
 
             var deferred = $q.defer();
 
-            $http.post(serviceBase + 'api/account/registerexternal', registerExternalData)
+            var data = $.extend(true, {}, registerExternalData, { clientId: ngAuthSettings.clientId });
+
+            $http.post(serviceBase + 'api/account/registerexternal', data)
                 .success(function (response) {
 
                     service._authorize(response);
 
                     deferred.resolve(response);
 
-            }).error(function (err, status) {
-                service.logOut();
-                deferred.reject(err);
-            });
+                }).error(function (err, status) {
+                    service.logOut();
+                    deferred.reject(err);
+                });
 
             return deferred.promise;
         },

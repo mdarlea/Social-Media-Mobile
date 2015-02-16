@@ -13,24 +13,49 @@
 
         $streamedTweetsService.init();
 
+        var isEmpty = function () {
+            $scope.empty = ($scope.data.items.length < 1);
+        }
+
         $scope.data = $streamedTweetsService.data;
 
-        $streamedTweetsService.find(queryOptions);
-        
+        $scope.$watch('data.items', isEmpty, true);
+
+        var getTweets = function () {
+            $streamedTweetsService
+                    .find(queryOptions)
+                    .then(
+                        function (response) {
+
+                        }, function (err) {
+                            $scope.message = err.error_description;
+                        }).finally(function (response) {
+
+                        });
+        }
+
+        var search = function () {
+            if ($scope.data.loading) return;
+
+            $scope.data.totalRecords = 0;
+            $scope.data.totalPages = 0;
+            $scope.data.pagingOptions.currentPage = 0;
+
+            getTweets();
+        }
+
+        $scope.$watch('data.filterOptions.filterText', function (newVal, oldVal) {
+            if (newVal !== oldVal) {
+                search();
+            }
+        }, true);
+
+        getTweets();
 
         $scope.loadMore = function () {
             //loads next tweets
             if (!$scope.data.loading) {
-                $streamedTweetsService
-                    .find(queryOptions)
-                    .then(
-                        function(response) {
-
-                        }, function(err) {
-                            $scope.message = err.error_description;
-                        }).finally(function(response) {
-
-                    });;
+                getTweets();
             } else {
                 $scope.loadingMessage = "Loading more tweets ...";
             }

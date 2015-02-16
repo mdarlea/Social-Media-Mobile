@@ -5,8 +5,8 @@
         //authService.debugAuth(false);
         
         ons.ready(function () {
-            $onsenService.logOut();
-            //$onsenService.buildMainNavigation();
+            //$onsenService.logOut();
+            $onsenService.buildMainNavigation();
         });
     }]);
 })();

@@ -6,7 +6,7 @@
 
         var service = {
             baseUrl: "",
-            
+
             data: {
                 fixedPage: false,
                 loading: false,
@@ -32,7 +32,7 @@
                 }
             },
 
-            init: function() {
+            init: function () {
                 this.data.items = [];
                 this.data.totalRecords = 0;
                 this.data.totalPages = 0;
@@ -78,9 +78,14 @@
                             that.data.items = data.Content;
                         }
                         else {
-                            for (var i = 0; i < data.Content.length; i++) {
-                                that.data.items.push(data.Content[i]);
+                            if (that.data.pagingOptions.currentPage < 1) {
+                                that.data.items = data.Content;
+                            } else {
+                                for (var i = 0; i < data.Content.length; i++) {
+                                    that.data.items.push(data.Content[i]);
+                                }
                             }
+
                             that.data.pagingOptions.currentPage++;
                         }
 
