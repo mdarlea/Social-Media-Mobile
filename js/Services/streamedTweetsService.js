@@ -5,7 +5,7 @@
         ['$http', '$q', '$pagedDataService', function ($http, $q, $pagedDataService) {
             var service = $.extend(true, {}, $pagedDataService,
                 {
-                    baseUrl: 'api/StreamedTweet',
+                    baseUrl: 'api/StreamedTweets',
                     data: {
                         fixedPage: false,
                         sortOptions: {

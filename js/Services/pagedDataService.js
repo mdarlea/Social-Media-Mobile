@@ -95,11 +95,11 @@
 
                         deferred.resolve(data);
 
-                    }).error(function () {
+                    }).error(function (err) {
 
                         that.data.loading = false;
 
-                        deferred.reject();
+                        deferred.reject(err.Message);
                     });
 
                 return deferred.promise;

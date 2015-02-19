@@ -34,7 +34,6 @@ angular.module('app').factory('authInterceptorService', ['$q', '$injector', '$lo
                     }
                 }
                 service.logOut();
-                $location.path('/login');
             }
             return $q.reject(rejection);
         }

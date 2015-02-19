@@ -1,19 +1,58 @@
-﻿<div ng-controller="LoginController" id="init_page">
-    <div bg-slider="slides" class="beach"></div>
+﻿<style>
+    .form-row {
+        margin: 4px;
+    }
+
+    .vspc {
+        margin-top: 20px;
+    }
+
+    .formarea {
+        width: 90%;
+        margin: 50px auto 0px auto;
+    }
+</style>
+<div ng-controller="LoginController" id="init_page">
+    <div bg-slider="slides" class="nature1"></div>
     <ons-page modifier="bg-transparent">
         <p style="text-align: center;">
             <h4>{{message}}</h4>
         </p>
-        <div ng-show="!isAuth">
-            <p style="text-align: center;">
-                <ons-button var="login.button.facebook" ng-click="authorize('Facebook')">| Connect with Facebook</ons-button>
-            </p>
-            <p style="text-align: center;">
-                <ons-button var="login.button.google" ng-click="authorize('Google')">| Connect with Google+</ons-button>
-            </p>
-            <p style="text-align: center;">
-                <ons-button var="login.button.twitter" class="button login twitter" ng-click="authorize('Twitter')"></ons-button>
-            </p>
+        <div ng-show="!isAuth" class="onl_login">
+            <h3 class="onl_authTitle"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title="Login">Login
+            </h3>
+            <div class="formarea onl_socialButtons">
+                    <div class="vspc form-row">
+                        <ons-button var="login.button.facebook"
+                                    modifier="large--cta"
+                                    class="onl_btn-facebook"
+                                    ng-click="authorize('Facebook')">
+                            <i class="fa fa-facebook fa-2x"></i>
+                            Connect with Facebook
+                        </ons-button>
+                    </div>
+                    <div class="vspc form-row">
+                        <ons-button var="login.button.google"
+                                    modifier="large--cta"
+                                    class="onl_btn-google-plus"
+                                    ng-click="authorize('Google')">
+                            <i class="fa fa-google-plus fa-2x"></i>
+                            Connect with Google+
+                        </ons-button>
+                    </div>
+                    <div class="vspc form-row">
+                        <ons-button var="login.button.twitter"
+                                    modifier="large--cta"
+                                    class="onl_btn-twitter"
+                                    ng-click="authorize('Twitter')">
+                            <i class="fa fa-twitter fa-2x"></i>
+                            Connect with Twitter
+                        </ons-button>
+                    </div>
+            </div>
         </div>
-    </ons-page>
+</ons-page>
 </div>

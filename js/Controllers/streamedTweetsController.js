@@ -3,9 +3,7 @@
 
     angular.module('app').controller('StreamedTweetsController', ['$scope', '$streamedTweetsService', function ($scope, $streamedTweetsService) {
 
-        var queryOptions = {
-            userProfileId: 21
-        };
+        var queryOptions = {};
 
         $scope.title = "Timeline";
 
@@ -28,7 +26,7 @@
                         function (response) {
 
                         }, function (err) {
-                            $scope.message = err.error_description;
+                            $scope.message = err;
                         }).finally(function (response) {
 
                         });

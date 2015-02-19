@@ -36,6 +36,8 @@ function handleOpenURL(url) {
     console.log('The app launched with URL : ' + url);
 
     var body = document.getElementById("init_page");
+    if (!body) return;
+
     var oauthController = angular.element(body).scope();
     oauthController.externalAuthorization(url);
 }

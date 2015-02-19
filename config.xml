@@ -9,5 +9,6 @@
   <access origin="*" />
   <vs:plugin name="nl.x-services.plugins.launchmyapp" version="3.2.2" />
   <vs:plugin name="org.apache.cordova.inappbrowser" version="0.6.1-dev" />
+  <vs:plugin name="com.oauthio.plugins.oauthio" version="0.2.4" />
   <vs:platformSpecificValues />
 </widget>

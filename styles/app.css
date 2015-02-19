@@ -44,6 +44,12 @@
     transition:background-image 2s, transform 2s;
 }
 
+.nature3 {
+    background-image: url('../images/nature3.jpg');
+    -webkit-transition: background-image 2s, -webkit-transform 2s;
+    transition:background-image 2s, transform 2s;
+}
+
 .button.login {
     background-position:center; 
     background-repeat:no-repeat; 
@@ -54,4 +60,21 @@
 
 .button.login.twitter {
     background-image: url('../images/sign-in-with-twitter-gray.png');
+}
+
+.col-xs-2
+ {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.col-xs-2
+{
+  float: left;
+}
+
+.col-xs-2 {
+  width: 16.666666666666664%;
 }

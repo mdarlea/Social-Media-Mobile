@@ -3,7 +3,7 @@
 
     angular.module('app').controller('LoginController', ['$scope', 'ngAuthSettings', '$utilities', 'authService', '$onsenService',
         function ($scope, ngAuthSettings, $utilities, authService, $onsenService) {
-            $scope.slides = ['beach', 'green', 'mountain', 'nature1', 'nature2'];
+            $scope.slides = ['beach', 'green', 'mountain', 'nature3', 'nature1', 'nature2'];
 
             $scope.message = "";
             
@@ -19,10 +19,10 @@
 
                 var externalProviderUrl = ngAuthSettings.apiServiceBaseUri;
                 if (provider === "Twitter") {
-                    var callbackUrl = "appuri://callback";
-                    //var callbackUrl = "http://www.swaksoft.com/oauth/callbackmobile";
+                    var callbackUrl = ngAuthSettings.mobileUrl + provider;
+                    var redirect = provider + "OAuth/AuthenticateExternal?callbackUrl=" +encodeURIComponent(callbackUrl);
 
-                    externalProviderUrl += "OAuth/AuthenticateExternal?callbackUrl=" + encodeURIComponent(callbackUrl);
+                    externalProviderUrl += redirect;
                 
                 } else {
                     var redirectUri = ngAuthSettings.apiServiceBaseUri + 'facebookcomplete.html';
@@ -35,21 +35,14 @@
                 var ref = window.open(externalProviderUrl, "_system");
             };
 
-            //$scope.isAuth = authService.authentication.isAuth;
+            var authorize = function(provider, oauthToken, oauthVerifier) {
+                    $scope.message = "Authorizing " +provider + " ...";
+                    $scope.isAuth = true;
 
-            $scope.externalAuthorization = function (url) {
-                ons.ready(function () {
-                    $scope.$apply(function () {
-                        $scope.isAuth = true;
-
-                        $scope.message = "Authorizing Twitter ...";
-
-                        var fragment = $utilities.getFragment(url);
-                        
                         var externalData = {
-                            provider: "Twitter",
-                            oauthToken: fragment.oauth_token,
-                            oauthVerifier: fragment.oauth_verifier
+                            provider : provider,
+                            externalAccessToken: oauthToken,
+                            oauthVerifier: oauthVerifier
                         };
 
                         authService.obtainAccessToken(externalData, "ObtainLocalAccessTokenWithVerifier")
@@ -67,6 +60,15 @@
                             }).finally(function (response) {
                                 $scope.isAuth = authService.authentication.isAuth;
                             });
+            }
+
+            $scope.externalAuthorization = function (url) {
+                ons.ready(function () {
+                    $scope.$apply(function () {
+                        var provider = $utilities.getProviderName(ngAuthSettings.mobileUrl, url);
+                        var fragment = $utilities.getFragment(url);
+
+                        authorize(provider, fragment.oauth_token, fragment.oauth_verifier);
                     });
                 });
            
