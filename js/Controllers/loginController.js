@@ -4,7 +4,7 @@
     angular.module('app').controller('LoginController', ['$scope', 'ngAuthSettings', '$utilities', 'authService', '$onsenService',
         function ($scope, ngAuthSettings, $utilities, authService, $onsenService) {
             $scope.slides = ['beach', 'green', 'mountain', 'nature3', 'nature1', 'nature2'];
-
+           
             $scope.message = "";
             
             $scope.authorize = function (provider) {

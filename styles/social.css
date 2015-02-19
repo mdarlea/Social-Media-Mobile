@@ -1,100 +1,19 @@
-﻿
-/*
-    Note: It is best to use a less version of this file ( see http://css2less.cc
-    For the media queries use @screen-sm-min instead of 768px.
-    For .onl_spanOr use @body-bg instead of white.
-*/
-@media (min-width: 768px) {
-    .onl_row-sm-offset-3 div:first-child[class*="col-"] {
-        margin-left: 25%;
-    }
-}
+﻿.onl_socialButtons .onl_btn-facebook {background: #3b5998;border-color:#172d5e}
+.onl_socialButtons .onl_btn-twitter {background: #00aced;border-color:#043d52}
+.onl_socialButtons .onl_btn-google-plus {background: #c32f10;border-color:#6b1301}
+.onl_socialButtons .onl_btn-soundcloud {background: #ff8800;border-color:#c73e04}
+.onl_socialButtons .onl_btn-github {background: #666666;border-color:#333333}
+.onl_socialButtons .onl_btn-steam {background: #878787;border-color:#292929}
+.onl_socialButtons .onl_btn-pinterest {background: #cc2127;border-color:#780004}
+.onl_socialButtons .onl_btn-vimeo {background: #1ab7ea;border-color:#162221}
+.onl_socialButtons .onl_btn-lastfm {background: #c3000d;border-color:#5e0208}
+.onl_socialButtons .onl_btn-yahoo {background: #400191;border-color:#230052}
+.onl_socialButtons .onl_btn-vk {background: #45668e;border-color:#1a3352}
+.onl_socialButtons .onl_btn-spotify {background: #7ab800;border-color:#3a5700}
+.onl_socialButtons .onl_btn-linkedin {background: #0976b4;border-color:#004269}
+.onl_socialButtons .onl_btn-stumbleupon {background: #eb4924;border-color:#943019}
+.onl_socialButtons .onl_btn-tumblr {background: #35465c;border-color:#142030}
+.onl_socialButtons .onl_btn-foursquare {background: #0732a2;border-color:#142030}
+.onl_socialButtons .onl_btn-yelp {background: red;border-color:#142030}
+.onl_socialButtons .onl_btn-skype {background: #00AFF0;border-color:#142030}
 
-.onl_login .onl_authTitle {
-    text-align: center;
-	line-height: 300%;
-}
-	
-.onl_login .onl_socialButtons button {
-	color: white; 
-	opacity:0.9;
-    width: 100%;
-}
-
-.onl_login .onl_socialButtons .onl_btn-facebook {background: #3b5998;border-color:#172d5e}
-.onl_login .onl_socialButtons .onl_btn-twitter {background: #00aced;border-color:#043d52}
-.onl_login .onl_socialButtons .onl_btn-google-plus {background: #c32f10;border-color:#6b1301}
-.onl_login .onl_socialButtons .onl_btn-soundcloud {background: #ff8800;border-color:#c73e04}
-.onl_login .onl_socialButtons .onl_btn-github {background: #666666;border-color:#333333}
-.onl_login .onl_socialButtons .onl_btn-steam {background: #878787;border-color:#292929}
-.onl_login .onl_socialButtons .onl_btn-pinterest {background: #cc2127;border-color:#780004}
-.onl_login .onl_socialButtons .onl_btn-vimeo {background: #1ab7ea;border-color:#162221}
-.onl_login .onl_socialButtons .onl_btn-lastfm {background: #c3000d;border-color:#5e0208}
-.onl_login .onl_socialButtons .onl_btn-yahoo {background: #400191;border-color:#230052}
-.onl_login .onl_socialButtons .onl_btn-vk {background: #45668e;border-color:#1a3352}
-.onl_login .onl_socialButtons .onl_btn-spotify {background: #7ab800;border-color:#3a5700}
-.onl_login .onl_socialButtons .onl_btn-linkedin {background: #0976b4;border-color:#004269}
-.onl_login .onl_socialButtons .onl_btn-stumbleupon {background: #eb4924;border-color:#943019}
-.onl_login .onl_socialButtons .onl_btn-tumblr {background: #35465c;border-color:#142030}
-.onl_login .onl_socialButtons .onl_btn-foursquare {background: #0732a2;border-color:#142030}
-.onl_login .onl_socialButtons .onl_btn-yelp {background: red;border-color:#142030}
-.onl_login .onl_socialButtons .onl_btn-skype {background: #00AFF0;border-color:#142030}
-
-.onl_login .onl_socialButtons .onl_btn-meetup {
-    background: whitesmoke;
-    border-color: #142030;
-    background-image: url('images/meetup.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    -ms-background-size: 75px 40px;
-    background-size: 75px 40px;
-    min-height: 60px;
-}
-
-.onl_login .onl_loginOr {
-	position: relative;
-	font-size: 1.5em;
-	color: #aaa;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	padding-top: 0.5em;
-	padding-bottom: 0.5em;
-}
-.onl_login .onl_loginOr .onl_hrOr {
-	background-color: #cdcdcd;
-	height: 1px;
-	margin-top: 0px !important;
-	margin-bottom: 0px !important;
-}
-.onl_login .onl_loginOr .onl_spanOr {
-    display: block;
-	position: absolute;
-	left: 30%;
-	top: -0.75em;
-	background-color: white;
-	text-align: center;
-    height: 1.5em;
-    width: 50%;
-    -moz-border-radius: 1em 2em 1em 2em;
-    -ms-border-radius: 1em 2em 1em 2em;
-    border-radius: 1em 2em 1em 2em;
-}
-
-.onl_login .onl_loginForm .input-group {
-    margin-left: 30%;
-}
-
-.onl_login .onl_loginForm .input-group.i {
-	width: 2em;
-}
-.onl_login .onl_loginForm  .help-block {
-    color: red;
-}
-
-	
-@media (min-width: 768px) {
-    .onl_login .onl_forgotPwd {
-        text-align: right;
-		margin-top:10px;
- 	}		
-}

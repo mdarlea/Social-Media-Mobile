@@ -1,0 +1,60 @@
+﻿<ons-page modifier="bg-transparent">
+    <ons-toolbar modifier="transparent">
+        <!--<div class="left">
+            <ons-back-button>Back</ons-back-button>
+        </div>-->
+        <div class="right">
+            <ons-toolbar-button>
+                <ons-icon ng-click="login.menu.toggle()"
+                          icon="ion-gear-a"
+                          style="vertical-align: -4px; font-size: 28px;">
+                </ons-icon>
+            </ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+
+    <h4>{{message}}</h4>
+    <div class="footer">
+        <ons-list style="border-top: none" class="onl_socialButtons">
+            <ons-list-item style="line-height: 1; padding: 0;" ng-show="!isAuth">
+                <ons-row class="action">
+                    <ons-col class="action-col onl_btn-facebook"
+                             ng-click="authorize('Facebook')">
+                        <div class="action-icon">
+                            <ons-icon icon="fa-facebook"></ons-icon>
+                        </div>
+                        <div class="action-label">Facebook</div>
+                    </ons-col>
+
+                    <ons-col class="action-col onl_btn-google-plus"
+                             ng-click="authorize('Google')">
+                        <div class="action-icon">
+                            <ons-icon icon="fa-google-plus"></ons-icon>
+                        </div>
+                        <div class="action-label">Google+</div>
+                    </ons-col>
+
+                    <ons-col class="action-col onl_btn-twitter"
+                             ng-click="authorize('Twitter')">
+                        <div class="action-icon">
+                            <ons-icon icon="fa-twitter"></ons-icon>
+                        </div>
+                        <div class="action-label">Twitter</div>
+                    </ons-col>
+                </ons-row>
+            </ons-list-item>
+            <ons-list-item class="to-wrapper">
+                <ons-row>
+                    <ons-col width="52px">
+                        <img src="images/dove4.jpg" class="to-image">
+                    </ons-col>
+                    <ons-col>
+                        <div class="to-name">Social Media</div>
+                        <div class="to-email">Swaksoft</div>
+                    </ons-col>
+                </ons-row>
+            </ons-list-item>
+        </ons-list>
+    </div>
+
+</ons-page>
