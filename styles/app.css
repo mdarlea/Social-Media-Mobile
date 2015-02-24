@@ -15,64 +15,36 @@
     background-color: transparent;
 }
 
-.beach {
-    background-image: url('../images/beach.jpg');
-    -webkit-transition: background-image 2s, -webkit-transform 2s;
-    transition:background-image 2s, transform 2s;
-}
-
-.green {
-    background-image: url('../images/green.jpg');
-    -webkit-transition: background-image 2s, -webkit-transform 2s;
-    transition:background-image 2s, transform 2s;
-}
-
-.mountain {
-    background-image: url('../images/mountain.jpg');
-    -webkit-transition: background-image 2s, -webkit-transform 2s;
-    transition:background-image 2s, transform 2s;
-}
-
-.nature1 {
-    background-image: url('../images/nature1.jpg');
-    -webkit-transition: background-image 2s, -webkit-transform 2s;
-    transition:background-image 2s, transform 2s;
-}
-
-.nature2 {
-    background-image: url('../images/nature2.jpg');
-    -webkit-transition: background-image 2s, -webkit-transform 2s;
-    transition:background-image 2s, transform 2s;
-}
-
+.beach,
+.green,
+.mountain,
+.nature1,
+.nature2,
 .nature3 {
+    -webkit-transition: background-image 2s, -webkit-transform 2s;
+    -moz-transition: background-image 2s, -moz-transform 2s;
+    -ms-transition: background-image 2s, -ms-transform 2s;
+    transition:background-image 2s, transform 2s;
+}
+
+.slider__background.beach {
+    background-image: url('../images/beach.jpg');
+}
+
+.slider__background.green {
+    background-image: url('../images/green.jpg');
+}
+
+.slider__background.mountain {
+    background-image: url('../images/mountain.jpg');
+}
+
+.slider__background.nature1 {
+    background-image: url('../images/nature1.jpg');
+}
+
+.slider__background.nature3 {
     background-image: url('../images/nature3.jpg');
-    -webkit-transition: background-image 2s, -webkit-transform 2s;
-    transition:background-image 2s, transform 2s;
-}
-
-.book {
-    background-image: url('../images/book.jpg');
-    -webkit-transition: background-image 2s, -webkit-transform 2s;
-    transition:background-image 2s, transform 2s;
-}
-
-.rose {
-    background-image: url('../images/rose.jpg');
-    -webkit-transition: background-image 2s, -webkit-transform 2s;
-    transition:background-image 2s, transform 2s;
-}
-
-.bible {
-    background-image: url('../images/bible.jpg');
-    -webkit-transition: background-image 2s, -webkit-transform 2s;
-    transition:background-image 2s, transform 2s;
-}
-
-.bible2 {
-    background-image: url('../images/bible2.jpg');
-    -webkit-transition: background-image 2s, -webkit-transform 2s;
-    transition:background-image 2s, transform 2s;
 }
 
 .page--menu-page__background {

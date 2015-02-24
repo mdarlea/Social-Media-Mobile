@@ -3,7 +3,7 @@
 
     angular.module('app').controller('LoginController', ['$scope', 'ngAuthSettings', '$utilities', 'authService', '$onsenService',
         function ($scope, ngAuthSettings, $utilities, authService, $onsenService) {
-            $scope.slides = ['beach', 'green', 'mountain', 'nature3', 'nature1', 'nature2'];
+            $scope.images = ['nature1', 'nature3', 'beach', 'green', 'mountain'];
            
             $scope.message = "";
             
@@ -35,14 +35,14 @@
                 var ref = window.open(externalProviderUrl, "_system");
             };
 
-            var authorize = function(provider, oauthToken, oauthVerifier) {
+            var authorize = function (provider, oauthConfig) {
                     $scope.message = "Authorizing " +provider + " ...";
                     $scope.isAuth = true;
 
                         var externalData = {
                             provider : provider,
-                            externalAccessToken: oauthToken,
-                            oauthVerifier: oauthVerifier
+                            externalAccessToken: oauthConfig.oauthToken,
+                            oauthVerifier: oauthConfig.oauthVerifier
                         };
 
                         authService.obtainAccessToken(externalData, "ObtainLocalAccessTokenWithVerifier")
@@ -68,7 +68,11 @@
                         var provider = $utilities.getProviderName(ngAuthSettings.mobileUrl, url);
                         var fragment = $utilities.getFragment(url);
 
-                        authorize(provider, fragment.oauth_token, fragment.oauth_verifier);
+                        var oauthConfig = {
+                            oauthToken: fragment.oauth_token,
+                            oauthVerifier: fragment.oauth_verifier
+                        }
+                        authorize(provider, oauthConfig);
                     });
                 });
            
