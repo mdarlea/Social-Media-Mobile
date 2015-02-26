@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app').factory('$streamedTweetsService',
-        ['$http', '$q', '$pagedDataService', function ($http, $q, $pagedDataService) {
+        ['$pagedDataService', function ($pagedDataService) {
             var service = $.extend(true, {}, $pagedDataService,
                 {
                     baseUrl: 'api/StreamedTweets',

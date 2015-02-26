@@ -30,13 +30,12 @@ angular.module('app').factory('authService', ['$http', '$q', 'localStorageServic
             });
         },
 
-        obtainAccessToken: function (externalData, action) {
+        obtainAccessToken: function (provider,externalData) {
 
             var deferred = $q.defer();
 
-            var actionName = (action) ? action : "ObtainLocalAccessToken";
-
-            var url = serviceBase + "api/Account/" + actionName;
+            var actionName = "ObtainLocalAccessToken";
+            var url = serviceBase + "api/" + provider + "/" + actionName;
 
             service.authentication.isAuthorizing = true;
 

@@ -5,7 +5,7 @@
 
     angular.module('app').constant('ngAuthSettings', {
         apiServiceBaseUri: serviceBase,
-        clientId: 'SocialMediaApp',
+        clientId: 'SocialMediaMobile',
         indexPage: '/home',
         mobileUrl: 'appuri://'
     });

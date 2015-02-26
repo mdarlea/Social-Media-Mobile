@@ -40,12 +40,11 @@
                     $scope.isAuth = true;
 
                         var externalData = {
-                            provider : provider,
                             externalAccessToken: oauthConfig.oauthToken,
                             oauthVerifier: oauthConfig.oauthVerifier
                         };
 
-                        authService.obtainAccessToken(externalData, "ObtainLocalAccessTokenWithVerifier")
+                        authService.obtainAccessToken(provider,externalData)
                             .then(function (response) {
                                 if (!authService.authentication.isAuth) {
                                     $scope.message = "Not authorized";
@@ -56,7 +55,7 @@
                                 }
 
                             }, function (err) {
-                                $scope.message = err.error_description;
+                                $scope.message = err.Message;
                             }).finally(function (response) {
                                 $scope.isAuth = authService.authentication.isAuth;
                             });
