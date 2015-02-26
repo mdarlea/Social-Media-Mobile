@@ -129,6 +129,7 @@
     <Content Include="images\sm7.jpg" />
     <Content Include="images\sm8.jpg" />
     <Content Include="js\app.js" />
+    <Content Include="js\common\local-storage.js" />
     <Content Include="js\common\modules.js" />
     <Content Include="js\common\utilities.js" />
     <Content Include="js\Constants\AuthSettings.js" />
@@ -142,7 +143,6 @@
     <Content Include="js\Directives\scroll.js" />
     <Content Include="js\Services\authInterceptorService.js" />
     <Content Include="js\Services\authService.js" />
-    <Content Include="js\Services\localStorageService.js" />
     <Content Include="js\Services\onsService.js" />
     <Content Include="js\Services\pagedDataService.js" />
     <Content Include="js\Services\streamedTweetsService.js" />

@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    angular.module('app').factory('localStorageService', ['$window', function ($window) {
+    angular.module('swaksoft.mobile').factory('localStorageService', ['$window', function ($window) {
         var service = {
             set: function(key, value) {
                 if (key && value) {
