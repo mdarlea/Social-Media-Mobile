@@ -1,7 +1,7 @@
 ﻿(function() {
     'use strict';
 
-    angular.module('app').directive('whenScrolled', function() {
+    angular.module('swaksoft.mobile').directive('whenScrolled', function () {
         return {
             link: function(scope, elm, attr) {
                 var raw = elm[0];
