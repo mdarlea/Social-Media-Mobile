@@ -6,8 +6,6 @@
     module.directive('bgSlider', function () {
         var data = {
             loading: true,
-            //imgPathPattern: "/images/{0}.jpg",
-            imgPathPattern: null,
             backgroundImages: [],
             idx: 0,
             getFirst: function () {
@@ -24,13 +22,13 @@
                 };
                 return this.getCurrent();
             },
-            load: function (images, callback) {
+            load: function (images, imgFilter, callback) {
                 this.loading = true;
                 this.idx = 0;
-                if (this.imgPathPattern) {
+                if (imgFilter) {
                     this.backgroundImages = [];
                     for (var i = 0; i < images.length; i++) {
-                        this.loadImage(images[i], images.length, callback);
+                        this.loadImage(images[i], images.length, imgFilter, callback);
                     }
                 } else {
                     this.backgroundImages = images;
@@ -38,8 +36,8 @@
                     this.loading = false;
                 }
             },
-            loadImage: function (name, counter, callback) {
-                var imgPath = this.imgPathPattern.replace("{0}", name);
+            loadImage: function (name, counter, imgFilter, callback) {
+                var imgPath = imgFilter.replace("{0}", name);
 
                 var image = new Image();
                 image.src = imgPath;
@@ -55,7 +53,7 @@
                 };
 
                 // handle failure
-                image.onerror = function () {
+                image.onerror = function (err) {
                     console.log("Could not load image " + imgPath);
                 };
             }
@@ -69,10 +67,17 @@
                 if (!elm.hasClass(css)) {
                     elm.addClass(css);
                 }
-                
-                scope.$watch(attr.bgSlider, function (newVal, oldVal) {
+
+                var loadedFilter = null;
+                var loadedImages = null;
+
+                var loadImages = function (images, filter) {
+                    if (filter === loadedFilter && images === loadedImages && images.length === loadedImages.length) {
+                        return;
+                    }
+
                     //preload images
-                    data.load(newVal, function () {
+                    data.load(images, filter, function () {
                         var first = data.getFirst();
                         for (var i = 0; i < data.backgroundImages; i++) {
                             var img = data.backgroundImages[i];
@@ -85,6 +90,17 @@
                             elm.addClass(first);
                         }
                     });
+                    loadedFilter = filter;
+                    loadedImages = images;
+                };
+
+                scope.$watch(attr.bgSlider, function (newVal, oldVal) {
+                    loadImages(newVal, attr.imgFilter);
+                }, true);
+
+                attr.$observe('imgFilter', function (val) {
+                    var images = scope.$eval(attr.bgSlider);
+                    loadImages(images, val);
                 });
 
                 var slider = setInterval(function () {

@@ -136,7 +136,7 @@
     <Content Include="js\Controllers\menuController.js" />
     <Content Include="js\Controllers\settingsController.js" />
     <Content Include="js\Controllers\streamedTweetsController.js" />
-    <Content Include="js\Directives\backgroundSlider.js" />
+    <Content Include="js\Directives\bg-slider.js" />
     <Content Include="js\Directives\scroll.js" />
     <Content Include="js\Services\authInterceptorService.js" />
     <Content Include="js\Services\authService.js" />

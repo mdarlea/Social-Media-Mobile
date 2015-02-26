@@ -10,9 +10,9 @@
         $scope.loadingMessage = "Loading ...";
 
         $streamedTweetsService.init();
-
-        var isEmpty = function () {
-            $scope.empty = ($scope.data.items.length < 1);
+        
+        var isEmpty = function (newVal, oldVal) {
+            $scope.empty = (newVal.length < 1);
         }
 
         $scope.data = $streamedTweetsService.data;
