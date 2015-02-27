@@ -25,7 +25,7 @@ ImageLoader.prototype = {
         if (imgFilter) {
             this.backgroundImages = [];
             for (var i = 0; i < images.length; i++) {
-                this.loadImage(images[i], images.length, imgFilter, callback);
+                this._loadImage(images[i], images.length, imgFilter, callback);
             }
         } else {
             this.backgroundImages = images;
@@ -33,7 +33,8 @@ ImageLoader.prototype = {
             this.loading = false;
         }
     },
-    loadImage: function (name, counter, imgFilter, callback) {
+
+    _loadImage: function (name, counter, imgFilter, callback) {
         var imgPath = imgFilter.replace("{0}", name);
 
         var image = new Image();

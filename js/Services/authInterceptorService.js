@@ -6,9 +6,11 @@ angular.module('app').factory('authInterceptorService', ['$q', '$injector', '$lo
         request: function(config) {
             config.headers = config.headers || {};
 
-            var authData = localStorageService.get('authorizationData');
-            if (authData) {
-                config.headers.Authorization = 'Bearer ' + authData.token;
+            var factory = $injector.get("$authenticationTokenFactory");
+
+            var authData = factory.getToken();
+            if (authData && !authData.isExpired()) {
+                config.headers.Authorization = 'Bearer ' + authData.token.access_token;
             }
 
             return config;
@@ -25,10 +27,13 @@ angular.module('app').factory('authInterceptorService', ['$q', '$injector', '$lo
             if (rejection.status === 401) {
                 //var authService = $injector.get('authService');
                 var service = $injector.get('$onsenService');
-                var authData = localStorageService.get('authorizationData');
+
+                var factory = $injector.get("$authenticationTokenFactory");
+
+                var authData = factory.getToken();
 
                 if (authData) {
-                    if (authData.useRefreshTokens) {
+                    if (authData.token.useRefreshTokens) {
                         $location.path('/refresh');
                         return $q.reject(rejection);
                     }

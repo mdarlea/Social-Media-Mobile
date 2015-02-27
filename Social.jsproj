@@ -129,8 +129,8 @@
     <Content Include="images\sm7.jpg" />
     <Content Include="images\sm8.jpg" />
     <Content Include="js\app.js" />
+    <Content Include="js\common\authenticationTokenFactory.js" />
     <Content Include="js\common\local-storage.js" />
-    <Content Include="js\common\modules.js" />
     <Content Include="js\common\utilities.js" />
     <Content Include="js\Constants\AuthSettings.js" />
     <Content Include="js\Controllers\homeController.js" />
@@ -141,6 +141,7 @@
     <Content Include="js\Controllers\streamedTweetsController.js" />
     <Content Include="js\Directives\bg-slider.js" />
     <Content Include="js\Directives\scroll.js" />
+    <Content Include="js\_modules.js" />
     <Content Include="js\Services\authInterceptorService.js" />
     <Content Include="js\Services\authService.js" />
     <Content Include="js\Services\onsService.js" />

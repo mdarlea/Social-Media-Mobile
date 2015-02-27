@@ -1,7 +1,7 @@
 ﻿(function () {
 'use strict';
-angular.module('app').factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', 
-    function ($http, $q, localStorageService, ngAuthSettings) {
+angular.module('app').factory('authService', ['$http', '$q', '$authenticationTokenFactory', 'ngAuthSettings',
+    function ($http, $q, $authenticationTokenFactory, ngAuthSettings) {
 
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
 
@@ -75,7 +75,7 @@ angular.module('app').factory('authService', ['$http', '$q', 'localStorageServic
             return deferred.promise;
         },
 
-        login: function(loginData) {
+        login: function (loginData) {
 
             var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
 
@@ -88,12 +88,12 @@ angular.module('app').factory('authService', ['$http', '$q', 'localStorageServic
             $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
                 if (loginData.useRefreshTokens) {
-                    localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
+                    $authenticationTokenFactory.createFrom(response, true);
                 }
                 else {
-                    localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
+                    $authenticationTokenFactory.createFrom(response, false);
                 }
-            
+
                 service.authentication.isAuth = true;
                 service.authentication.userName = loginData.userName;
                 service.authentication.useRefreshTokens = loginData.useRefreshTokens;
@@ -110,7 +110,7 @@ angular.module('app').factory('authService', ['$http', '$q', 'localStorageServic
 
         logOut: function () {
 
-            localStorageService.remove('authorizationData');
+            $authenticationTokenFactory.removeToken();
 
             service.authentication.isAuth = false;
             service.authentication.userName = "";
@@ -119,30 +119,31 @@ angular.module('app').factory('authService', ['$http', '$q', 'localStorageServic
 
         fillAuthData: function () {
 
-            var authData = localStorageService.get('authorizationData');
+            var authData = $authenticationTokenFactory.getToken();
             if (authData) {
+                var token = authData.token;
                 service.authentication.isAuth = true;
-                service.authentication.userName = authData.userName;
-                service.authentication.useRefreshTokens = authData.useRefreshTokens;
+                service.authentication.userName = token.userName;
+                service.authentication.useRefreshTokens = token.useRefreshTokens;
             }
         },
 
         refreshToken: function () {
             var deferred = $q.defer();
 
-            var authData = localStorageService.get('authorizationData');
+            var authData = $authenticationTokenFactory.getToken();
 
             if (authData) {
 
                 if (authData.useRefreshTokens) {
+                    var token = authData.token;
+                    var data = "grant_type=refresh_token&refresh_token=" + token.refreshToken + "&client_id=" + ngAuthSettings.clientId;
 
-                    var data = "grant_type=refresh_token&refresh_token=" + authData.refreshToken + "&client_id=" + ngAuthSettings.clientId;
-
-                    localStorageService.remove('authorizationData');
+                    $authenticationTokenFactory.removeToken();
 
                     $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
-                        localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
+                        $authenticationTokenFactory.createFrom(response, true);
 
                         deferred.resolve(response);
 
@@ -182,12 +183,7 @@ angular.module('app').factory('authService', ['$http', '$q', 'localStorageServic
             service.externalAuthData.externalAccessToken = null;
             service.externalAuthData.externalAccessVerifier = null;
 
-            localStorageService.set('authorizationData', {
-                token: response.access_token,
-                userName: response.userName,
-                refreshToken: "",
-                useRefreshTokens: false
-            });
+            $authenticationTokenFactory.createFrom(response);
 
             service.authentication.isAuth = true;
             service.authentication.userName = response.userName;
