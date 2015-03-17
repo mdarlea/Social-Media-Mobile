@@ -38,6 +38,11 @@ function handleOpenURL(url) {
     var body = document.getElementById("init_page");
     if (!body) return;
 
-    var oauthController = angular.element(body).scope();
-    oauthController.externalAuthorization(url);
+    var loginScope = angular.element(body).scope();
+
+    ons.ready(function() {
+        loginScope.$apply(function() {
+            loginScope.externalAuthorization(url);
+        });
+    });
 }

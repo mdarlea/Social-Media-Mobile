@@ -62,20 +62,14 @@
             }
 
             $scope.externalAuthorization = function (url) {
-                ons.ready(function () {
-                    $scope.$apply(function () {
-                        var provider = $utilities.getProviderName(ngAuthSettings.mobileUrl, url);
-                        var fragment = $utilities.getFragment(url);
+                var provider = $utilities.getProviderName(ngAuthSettings.mobileUrl, url);
+                var fragment = $utilities.getFragment(url);
 
-                        var oauthConfig = {
-                            oauthToken: fragment.oauth_token,
-                            oauthVerifier: fragment.oauth_verifier
-                        }
-                        authorize(provider, oauthConfig);
-                    });
-                });
-           
-        };
-
+                var oauthConfig = {
+                    oauthToken: fragment.oauth_token,
+                    oauthVerifier: fragment.oauth_verifier
+                }
+                authorize(provider, oauthConfig);
+            };
     }]);
 })();
