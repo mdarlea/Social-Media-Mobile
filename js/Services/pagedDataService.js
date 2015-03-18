@@ -3,6 +3,7 @@
 
     angular.module('app').factory('$pagedDataService', ['$http', '$q', 'ngAuthSettings', function ($http, $q, ngAuthSettings) {
         var serviceBase = ngAuthSettings.apiServiceBaseUri;
+        var pendingSearch = false;
 
         var service = {
             baseUrl: "",
@@ -40,19 +41,60 @@
                 this.data.loading = false;
             },
 
-            find: function (queryOptions) {
-                if (this.data.loading) {
-                    var defer = $q.defer();
-                    defer.reject();
-                    return defer.promise;
-                }
+            _find: function (queryOptions, deferred, isSearch) {
+                var options = this._getOptions(queryOptions);
 
+                this.data.loading = true;
+
+                var that = this;
+                $http.post(serviceBase + this.baseUrl, options)
+                  .success(function (data) {
+                      if (isSearch) {
+                          deferred.notify(options);
+
+                          var continueSearch = (that.data.filterOptions.filterText !== options.queryOptions.searchText);
+
+                          that._find(queryOptions, deferred, continueSearch);
+                          return;
+                      }
+
+                      if (that.data.fixedPage) {
+                          that.data.items = data.Content;
+                      }
+                      else {
+                          if (that.data.pagingOptions.currentPage < 1) {
+                              that.data.items = data.Content;
+                          } else {
+                              for (var i = 0; i < data.Content.length; i++) {
+                                  that.data.items.push(data.Content[i]);
+                              }
+                          }
+
+                          that.data.pagingOptions.currentPage++;
+                      }
+
+                      that.data.totalRecords = data.TotalRecords;
+
+                      that.data.loading = false;
+
+                      deferred.resolve(data);
+
+                  })
+                  .error(function (err) {
+
+                      that.data.loading = false;
+
+                      deferred.reject(err.Message);
+                  });
+            },
+
+            _getOptions: function (queryOptions) {
                 var query = (queryOptions) ? queryOptions : {};
                 var page = (this.data.fixedPage)
                                 ? this.data.pagingOptions.currentPage
                                 : this.data.pagingOptions.currentPage + 1;
 
-                var options = {
+                return {
                     queryOptions: $.extend(true, {}, query,
                         {
                             sortByField: (this.data.sortOptions.fields.length > 0)
@@ -66,41 +108,33 @@
                     page: page,
                     pageSize: this.data.pagingOptions.pageSize
                 };
+            },
+
+            find: function (queryOptions) {
+                if (this.data.loading) {
+                    var defer = $q.defer();
+                    defer.reject();
+                    return defer.promise;
+                }
 
                 var deferred = $q.defer();
 
-                var that = this;
-                that.data.loading = true;
+                this._find(queryOptions, deferred, false);
 
-                $http.post(serviceBase + this.baseUrl, options)
-                    .success(function (data) {
-                        if (that.data.fixedPage) {
-                            that.data.items = data.Content;
-                        }
-                        else {
-                            if (that.data.pagingOptions.currentPage < 1) {
-                                that.data.items = data.Content;
-                            } else {
-                                for (var i = 0; i < data.Content.length; i++) {
-                                    that.data.items.push(data.Content[i]);
-                                }
-                            }
+                return deferred.promise;
+            },
 
-                            that.data.pagingOptions.currentPage++;
-                        }
+            search: function (queryOptions) {
+                var deferred = $q.defer();
 
-                        that.data.totalRecords = data.TotalRecords;
+                if (this.data.loading) {
+                    deferred.reject();
+                    return deferred.promise;
+                }
 
-                        that.data.loading = false;
+                this.data.pagingOptions.currentPage = 0;
 
-                        deferred.resolve(data);
-
-                    }).error(function (err) {
-
-                        that.data.loading = false;
-
-                        deferred.reject(err.Message);
-                    });
+                this._find(queryOptions, deferred, true);
 
                 return deferred.promise;
             }

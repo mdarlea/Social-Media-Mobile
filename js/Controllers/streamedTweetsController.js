@@ -18,8 +18,7 @@
         $scope.data = $streamedTweetsService.data;
 
         $scope.$watch('data.items', isEmpty, true);
-
-        var pendingSearch = false;
+        
         var getTweets = function () {
             $streamedTweetsService
                     .find(queryOptions)
@@ -29,26 +28,33 @@
                         }, function (err) {
                             $scope.message = err;
                         }).finally(function (response) {
-                            if (pendingSearch) {
-                                search();
-                            }
+        
                         });
         }
 
         var search = function () {
-            pendingSearch = $scope.data.loading;
-            if (pendingSearch) {
-                return;
-            }
-                
-            $scope.data.pagingOptions.currentPage = 0;
+            $streamedTweetsService
+                    .search(queryOptions)
+                    .then(
+                        function (response) {
 
-            getTweets();
+                        },
+                        function (err) {
+                            $scope.message = err;
+                        }).finally(
+                            function (response) {
+
+                            },
+                            function (notify) {
+
+                            });
         }
 
         $scope.$watch('data.filterOptions.filterText', function (newVal, oldVal) {
             if (newVal !== oldVal) {
-                search();
+                if (!$scope.data.loading) {
+                    search();
+                }
             }
         }, true);
 
