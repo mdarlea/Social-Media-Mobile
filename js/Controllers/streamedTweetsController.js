@@ -19,6 +19,7 @@
 
         $scope.$watch('data.items', isEmpty, true);
 
+        var pendingSearch = false;
         var getTweets = function () {
             $streamedTweetsService
                     .find(queryOptions)
@@ -28,15 +29,18 @@
                         }, function (err) {
                             $scope.message = err;
                         }).finally(function (response) {
-
+                            if (pendingSearch) {
+                                search();
+                            }
                         });
         }
 
         var search = function () {
-            if ($scope.data.loading) return;
-
-            $scope.data.totalRecords = 0;
-            $scope.data.totalPages = 0;
+            pendingSearch = $scope.data.loading;
+            if (pendingSearch) {
+                return;
+            }
+                
             $scope.data.pagingOptions.currentPage = 0;
 
             getTweets();
