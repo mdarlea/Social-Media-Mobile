@@ -3,7 +3,6 @@
 
     angular.module('app').factory('$pagedDataService', ['$http', '$q', 'ngAuthSettings', function ($http, $q, ngAuthSettings) {
         var serviceBase = ngAuthSettings.apiServiceBaseUri;
-        var pendingSearch = false;
 
         var service = {
             baseUrl: "",
@@ -92,7 +91,14 @@
                 var query = (queryOptions) ? queryOptions : {};
                 var page = (this.data.fixedPage)
                                 ? this.data.pagingOptions.currentPage
-                                : this.data.pagingOptions.currentPage + 1;
+                                : null;
+                var minIdentity = null;
+                if (!this.data.fixedPage) {
+                    var max = this.data.items.length - 1;
+                    if (max > -1) {
+                        minIdentity = this.data.items[max].Id;
+                    }
+                }
 
                 return {
                     queryOptions: $.extend(true, {}, query,
@@ -106,6 +112,7 @@
                             searchText: this.data.filterOptions.filterText
                         }),
                     page: page,
+                    minIdentity: minIdentity,
                     pageSize: this.data.pagingOptions.pageSize
                 };
             },
