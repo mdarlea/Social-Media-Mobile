@@ -2,10 +2,9 @@
     'use strict';
 
     angular.module('swaksoft.common').directive('bgSlider', function () {
-        var loader = new ImageLoader();
-
         return {
             link: function (scope, elm, attr) {
+                var loader = new ImageLoader();
                 loader.loading = true;
                 var css = "slider__background";
 
