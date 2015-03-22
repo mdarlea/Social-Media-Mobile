@@ -53,8 +53,10 @@
 
                           var continueSearch = (that.data.filterOptions.filterText !== options.queryOptions.searchText);
 
-                          that._find(queryOptions, deferred, continueSearch);
-                          return;
+                          if (continueSearch) {
+                              that._find(queryOptions, deferred, true);
+                              return;
+                          }
                       }
 
                       if (that.data.fixedPage) {
