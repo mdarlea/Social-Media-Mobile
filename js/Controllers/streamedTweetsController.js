@@ -68,5 +68,26 @@
                 $scope.loadingMessage = "Loading more tweets ...";
             }
         };
+
+        $scope.lazyRepeatDelegate = {
+            countItems: function () {
+                // Return number of items.
+                return 100;
+            },
+
+            calculateItemHeight: function (index) {
+                // Return the height of an item in pixels.
+                return 45;
+            },
+
+            configureItemScope: function (index, itemScope) {
+                // Initialize scope
+            },
+
+            destroyItemScope: function (index, itemScope) {
+                // Optional method that is called when an item is unloaded.
+                console.log('Destroyed item with index: ' + index);
+            }
+        };
     }]);
 })();
