@@ -17,7 +17,7 @@
 
         $scope.data = $streamedTweetsService.data;
 
-        $scope.$watch('data.items', isEmpty, true);
+        $scope.$watchCollection('data.items', isEmpty, true);
         
         var getTweets = function () {
             $streamedTweetsService
