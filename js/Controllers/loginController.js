@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').controller('LoginController', ['$scope', 'ngAuthSettings', '$utilities', 'authService', '$onsenService',
-        function ($scope, ngAuthSettings, $utilities, authService, $onsenService) {
+    angular.module('app').controller('LoginController', ['$scope', 'swAppSettings', '$utilities', 'authService', '$onsenService',
+        function ($scope, swAppSettings, $utilities, authService, $onsenService) {
             $scope.images = ['nature1', 'nature3', 'beach', 'green', 'mountain'];
            
             $scope.message = "";
@@ -17,18 +17,18 @@
                 //$onsenService.buildMainNavigation();
                 //return;
 
-                var externalProviderUrl = ngAuthSettings.apiServiceBaseUri;
+                var externalProviderUrl = swAppSettings.apiServiceBaseUri;
                 if (provider === "Twitter") {
-                    var callbackUrl = ngAuthSettings.mobileUrl + provider;
+                    var callbackUrl = swAppSettings.mobileUrl + provider;
                     var redirect = provider + "OAuth/AuthenticateExternal?callbackUrl=" +encodeURIComponent(callbackUrl);
 
                     externalProviderUrl += redirect;
                 
                 } else {
-                    var redirectUri = ngAuthSettings.apiServiceBaseUri + 'facebookcomplete.html';
+                    var redirectUri = swAppSettings.apiServiceBaseUri + 'facebookcomplete.html';
 
                     externalProviderUrl += "api/Account/ExternalLogin?provider=" + provider
-                                                                                 + "&response_type=token&client_id=" + ngAuthSettings.clientId
+                                                                                 + "&response_type=token&client_id=" + swAppSettings.clientId
                                                                                  + "&redirect_uri=" + redirectUri;
                 }
 
@@ -62,7 +62,7 @@
             }
 
             $scope.externalAuthorization = function (url) {
-                var provider = $utilities.getProviderName(ngAuthSettings.mobileUrl, url);
+                var provider = $utilities.getProviderName(swAppSettings.mobileUrl, url);
                 var fragment = $utilities.getFragment(url);
 
                 var oauthConfig = {

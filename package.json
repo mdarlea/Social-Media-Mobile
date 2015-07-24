@@ -1,10 +1,7 @@
 {
-  "name": "onsenapp",
-  "version": "0.0.0",
-  "description": "",
-  "scripts": {
-    "start": "node gulp-run.js"
-  },
+  "name": "io.cordova.socialmedia",
+  "version": "1.0.0",
+  "description": "Social Media Application",
   "author": "",
   "license": "MIT",
   "devDependencies": {

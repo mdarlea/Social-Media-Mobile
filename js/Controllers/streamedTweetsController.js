@@ -1,7 +1,8 @@
 ﻿(function() {
     'use strict';
 
-    angular.module('app').controller('StreamedTweetsController', ['$scope', '$streamedTweetsService', function ($scope, $streamedTweetsService) {
+    angular.module('app').controller('StreamedTweetsController', ['$scope', 'StreamedTweetsService',
+        function ($scope, StreamedTweetsService) {
 
         var queryOptions = {};
 
@@ -9,18 +10,18 @@
 
         $scope.loadingMessage = "Loading ...";
 
-        $streamedTweetsService.init();
-        
+        var streamedTweetsService = new StreamedTweetsService();
+            
         var isEmpty = function (newVal, oldVal) {
             $scope.empty = (newVal.length < 1);
         }
 
-        $scope.data = $streamedTweetsService.data;
+        $scope.data = streamedTweetsService.data;
 
         $scope.$watchCollection('data.items', isEmpty, true);
         
         var getTweets = function () {
-            $streamedTweetsService
+            streamedTweetsService
                     .find(queryOptions)
                     .then(
                         function (response) {
@@ -33,7 +34,7 @@
         }
 
         var search = function () {
-            $streamedTweetsService
+            streamedTweetsService
                     .search(queryOptions)
                     .then(
                         function (response) {

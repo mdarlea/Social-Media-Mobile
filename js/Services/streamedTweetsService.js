@@ -1,22 +1,22 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').factory('$streamedTweetsService',
-        ['$pagedDataService', function ($pagedDataService) {
-            var service = $.extend(true, {}, $pagedDataService,
-                {
-                    baseUrl: 'api/StreamedTweets',
-                    data: {
-                        fixedPage: false,
-                        sortOptions: {
-                            fields: ["UserName"]
-                        },
-                        pagingOptions: {
-                            pageSize: 10
-                        }
+    angular.module('app').factory('StreamedTweetsService',
+        ['PagedDataService', function (PagedDataService) {
+            var StreamedTweetsService = function () {
+                PagedDataService.apply(this, ['api/StreamedTweets', {
+                    fixedPage: false,
+                    sortOptions: {
+                        fields: ["UserName"]
+                    },
+                    pagingOptions: {
+                        pageSize: 10
                     }
-                });
+                }]);
+            };
 
-            return service;
+            StreamedTweetsService.prototype = new PagedDataService();
+
+            return StreamedTweetsService;
         }]);
 })();
